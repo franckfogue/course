@@ -1,0 +1,1 @@
+cat  C:\Users\franc\.ssh\id_rsa.pub
