@@ -2,11 +2,19 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.time.LocalDate;
 public class Classement {
     protected int idClassement;
     protected Coureur coureur;
     protected int place;
     protected BigDecimal gain;
+    public Classement(int idClassement,Coureur coureur, int place,BigDecimal gain)
+    {
+        this.idClassement=idClassement;
+        this.coureur=coureur;
+        this.place=place;
+        this.gain=gain;
+    }
 
     // Getters et Setters
     public int getIdClassement() {

@@ -2,15 +2,55 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.time.LocalDate;
+/**
+ * classe métier de gestion d'une course
+ *
+ * @author Franck Fogue
+ * @version 1.0
+ * @see Course
+ */
 public class Coureur {
+    /**
+     * identifiant du coureur
+     */
     protected int idCoureur;
+    /**
+     * matricule  du coureur
+     */
     protected String matricule;
+    /**
+     * prenom du coureur
+     */
     protected String prenom;
+    /**
+     * nom du coureur
+     */
     protected String nom;
-    protected Date dateNaiss;
+    /**
+     * datenaissance coureur
+     */
+    protected LocalDate dateNaiss;
+    /**
+     * nationalité du coureur
+     */
     protected String nationalite;
+    /**
+     * ville de residence coureur
+     */
     protected String villeResidence;
 
+
+    public Coureur(int idCoureur,String matricule,String prenom, String nom,LocalDate datenaiss,String nationalite,String villeResidence)
+    {
+        this.idCoureur=idCoureur;
+        this.matricule=matricule;
+        this.prenom=prenom;
+        this.nom=nom;
+        this.dateNaiss=datenaiss;
+        this.nationalite=nationalite;
+        this.villeResidence=villeResidence;
+    }
     // Getters and Setters
     public int getIdCoureur() {
         return idCoureur;
@@ -44,11 +84,11 @@ public class Coureur {
         this.nom = nom;
     }
 
-    public Date getDateNaiss() {
+    public LocalDate getDateNaiss() {
         return dateNaiss;
     }
 
-    public void setDateNaiss(Date dateNaiss) {
+    public void setDateNaiss(LocalDate dateNaiss) {
         this.dateNaiss = dateNaiss;
     }
 

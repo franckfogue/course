@@ -2,17 +2,24 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.time.LocalDate;
 public class Course {
     protected int courseId;
     protected String nom;
     protected BigDecimal priceMoney;
-    protected Date dateDebut;
-    protected Date dateFin;
+    protected LocalDate dateDebut;
+    protected LocalDate dateFin;
     protected int kmTotal;
     protected List<Etape> etapes;
     protected List<Coureur> inscrits;
     protected List<Classement> classements;
-    public Course() {
+    public Course(int courseId,String nom,BigDecimal priceMoney,LocalDate dateDebut,LocalDate dateFin,int kmTotal) {
+        this.courseId=courseId;
+        this.nom=nom;
+        this.priceMoney=priceMoney;
+        this.dateDebut=dateDebut;
+        this.dateFin=dateFin;
+        this.kmTotal=kmTotal;
         this.etapes = new ArrayList<>();
         this.inscrits = new ArrayList<>();
         this.classements = new ArrayList<>();
@@ -43,19 +50,19 @@ public class Course {
         this.priceMoney = priceMoney;
     }
 
-    public Date getDateDebut() {
+    public LocalDate getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(Date dateDebut) {
-        this.dateDebut = dateDebut;
-    }
-
-    public Date getDateFin() {
+    public LocalDate getDateFin() {
         return dateFin;
     }
 
-    public void setDateFin(Date dateFin) {
+    public void setDateDebut(LocalDate dateDebut) {
+        this.dateDebut = dateDebut;
+    }
+
+    public void setDateFin(LocalDate dateFin) {
         this.dateFin = dateFin;
     }
 
@@ -126,7 +133,7 @@ public class Course {
         inscrits.remove(coureur);
     }
     public void resultat(Coureur coureur, int place, BigDecimal gain) {
-        Classement newClassement = new Classement();
+        Classement newClassement = new Classement(1,coureur,place,gain);
         newClassement.setCoureur(coureur);
         newClassement.setPlace(place);
         newClassement.setGain(gain);

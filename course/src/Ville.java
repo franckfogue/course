@@ -1,10 +1,22 @@
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.time.LocalDate;
 public class Ville {
     protected int idVille;
     protected String nom;
     protected double latitude;
     protected double longitude;
     protected String pays;
-
+    public  Ville(int idVille,String nom,double latitude,double longitude,String pays)
+    {
+        this.idVille=idVille;
+        this.nom=nom;
+        this.latitude=latitude;
+        this.longitude=longitude;
+        this.pays=pays;
+    }
     // Getters et Setters
     public int getIdVille() {
         return idVille;
