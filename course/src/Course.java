@@ -44,10 +44,7 @@ public class Course {
     /**
      * enssemble liste des coureur
      */
-    protected List<Coureur> inscrits;
-    /**
-     * emssemble liste classement course
-     */
+
     protected List<Classement> classements;
     /**
      * constructeur paramétré
@@ -190,22 +187,7 @@ public class Course {
      *
      * @return inscrits liste des inscrits
      */
-    public List<Coureur> getInscrits() {
-        return inscrits;
-    }
-    /**
-     * setter liste inscrits
-     *
-     * @param inscrits liste des inscrits
-     */
-    public void setInscrits(List<Coureur> inscrits) {
-        this.inscrits = inscrits;
-    }
-    /**
-     * getter liste classement
-     *
-     * @return classements liste classement
-     */
+
     public List<Classement> getClassements() {
         return classements;
     }
@@ -256,50 +238,62 @@ public class Course {
         return null; // Aucun vainqueur trouvé
     }
     /**
-     * ajout d'un coureur
-     * @param coureur coureur à ajouter
+     * Ajoute un coureur à la liste des inscrits à la course, s'il n'est pas déjà inscrit.
+     * @param coureur Le coureur à ajouter.
+     * @return Vrai si le coureur a été ajouté avec succès, faux sinon (s'il est déjà inscrit).
      */
-    public void addCoureur(Coureur coureur) {
-        inscrits.add(coureur);
+    public boolean addCoureur(Coureur coureur) {
+
+            classements.add(new Classement(0,coureur,0,new BigDecimal(0)));
+            return true;
+
     }
+
     /**
      * suppression d'un coureur à la course
      * @param coureur coureur à supprimer
      */
     // Supprime un coureur de la liste des inscrits
     public void supCoureur(Coureur coureur) {
-        inscrits.remove(coureur);
+        for(int i=0;i<classements.size();i++){
+            if(classements.get(i).getCoureur().equals(coureur)) {
+                classements.remove(i);
+                break;
+            }
+         }
+
     }
     /**
-     * resultat coureur
-     * @param coureur coureur
-     * @param place obtenu
-     * @param gain gagné
+     * Enregistre le résultat d'un coureur à la course.
+     * @param coureur Le coureur.
+     * @param place La place obtenue (-1 si le coureur abandonne).
+     * @param gain Le gain obtenu.
      */
     public void resultat(Coureur coureur, int place, BigDecimal gain) {
-        Classement newClassement = new Classement(1,coureur,place,gain);
-        newClassement.setCoureur(coureur);
-        newClassement.setPlace(place);
-        newClassement.setGain(gain);
-        classements.add(newClassement);
+        for (int i = 0; i < classements.size(); i++) {
+            if (classements.get(i).getCoureur().equals(coureur)) {
+                classements.set(i, new Classement(0, coureur, place, gain));
+                break;
+            }
+        }
     }
+
+
+
     /**
      * modifier le classement coureur
      * @param coureur coureur
      * @param place obtenu
      * @param gain gagné
      */
-    public void modif(Coureur coureur, int place, BigDecimal gain) {
-        for (Classement classement : classements) {
-            if (classement.getCoureur().equals(coureur)) {
-                classement.setPlace(place);
-                classement.setGain(gain);
-                return;
+    public void modif(Coureur coureur, int place, BigDecimal gain){
+            for (int i = 0; i < classements.size(); i++) {
+                if (classements.get(i).getCoureur().equals(coureur)) {
+                    classements.set(i, new Classement(0, coureur, place, gain));
+                    break;
+                }
             }
         }
-        // Si le coureur n'existe pas dans les classements, on l'ajoute
-        resultat(coureur, place, gain);
-    }
     /**
      * ajouter une etape
      * @param etape etape
@@ -334,17 +328,9 @@ public class Course {
      * vérifie si le classement de tous les coureurs inscrits à la course ont été enregistré
      */
     public boolean classementComplet() {
-        for (Coureur coureur : inscrits) {
-            boolean hasClassement = false;
-            for (Classement classement : classements) {
-                if (classement.getCoureur().equals(coureur)) {
-                    hasClassement = true;
-                    break;
-                }
-            }
-            if (!hasClassement) {
-                return false;
-            }
+        for (int i=0;i<classements.size();i++)
+        {
+         if(  classements.get(i).getPlace()==0) return false;
         }
         return true;
     }

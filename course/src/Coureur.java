@@ -35,10 +35,7 @@ public class Coureur {
      * nationalité du coureur
      */
     protected String nationalite;
-    /**
-     * ville de residence coureur
-     */
-    protected String villeResidence;
+
 
     /**
      * constructeur paramétré
@@ -50,9 +47,8 @@ public class Coureur {
      * @param nom nom du coureur
      * @param datenaiss date de naissance du coureur
      * @param nationalite nationalite du coureur
-     * @param villeResidence ville de residence du coureur
      */
-    public Coureur(int idCoureur,String matricule,String prenom, String nom,LocalDate datenaiss,String nationalite,String villeResidence)
+    public Coureur(int idCoureur,String matricule,String prenom, String nom,LocalDate datenaiss,String nationalite)
     {
         this.idCoureur=idCoureur;
         this.matricule=matricule;
@@ -60,7 +56,7 @@ public class Coureur {
         this.nom=nom;
         this.dateNaiss=datenaiss;
         this.nationalite=nationalite;
-        this.villeResidence=villeResidence;
+
     }
     // Getters and Setters
     /**
@@ -160,20 +156,5 @@ public class Coureur {
     public void setNationalite(String nationalite) {
         this.nationalite = nationalite;
     }
-    /**
-     * getter ville residence
-     *
-     * @return villeResidence
-     */
-    public String getVilleResidence() {
-        return villeResidence;
-    }
-    /**
-     * setter ville residence
-     *
-     * @param villeResidence ville residence
-     */
-    public void setVilleResidence(String villeResidence) {
-        this.villeResidence = villeResidence;
-    }
+
 }
