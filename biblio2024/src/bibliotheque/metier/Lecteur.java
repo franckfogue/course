@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class Lecteur {
-    private static int numact=1;
     private int numlecteur;
     private  String nom,prenom;
     private LocalDate dn;
@@ -16,8 +15,8 @@ public class Lecteur {
 
     private List<Location> lloc=new ArrayList<>();
 
-    public Lecteur(String nom, String prenom, LocalDate dn, String adresse, String mail, String tel) {
-        this.numlecteur = numact++;
+    public Lecteur(int numlecteur, String nom, String prenom, LocalDate dn, String adresse, String mail, String tel) {
+        this.numlecteur = numlecteur;
         this.nom = nom;
         this.prenom = prenom;
         this.dn = dn;
@@ -116,26 +115,13 @@ public class Lecteur {
         return Objects.hash(numlecteur);
     }
 
-
-    public List<Exemplaire> listerExemplairesEnLocation() {
-        List<Exemplaire> exemplairesEnLocation = new ArrayList<>();
-        for (Location location : lloc) {
-            if (location.getLoueur().equals(this) && location.getDateRestitution() == null) {
-                exemplairesEnLocation.add(location.getExemplaire());
-            }
-        }
-        return exemplairesEnLocation;
+    public List<Exemplaire> listerExemplairesEnLocation(){
+        //TODO lister exemplaires en location lecteur
+        return null;
     }
 
-
-    public List<Exemplaire> listerExemplairesEnLoues() {
-        List<Exemplaire> exemplairesEnLoues = new ArrayList<>();
-        for (Location location : lloc) {
-            if (location.getLoueur().equals(this)) {
-                exemplairesEnLoues.add(location.getExemplaire());
-            }
-        }
-        return exemplairesEnLoues;
+    public List<Exemplaire> listerExemplairesEnLoues(){
+        //TODO lister exemplaires loues lecteur
+        return null;
     }
-
 }

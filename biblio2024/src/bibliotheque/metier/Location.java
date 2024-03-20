@@ -1,9 +1,8 @@
 package bibliotheque.metier;
 
 import java.time.LocalDate;
-import java.util.Objects;
 import java.time.temporal.ChronoUnit;
-
+import java.util.Objects;
 
 public class Location {
     private LocalDate dateLocation;
@@ -23,6 +22,7 @@ public class Location {
     public Location(Lecteur loueur, Exemplaire exemplaire) {
         this.loueur = loueur;
         this.exemplaire = exemplaire;
+        this.dateLocation=LocalDate.now();
     }
 
     public LocalDate getDateLocation() {
@@ -79,28 +79,19 @@ public class Location {
                 ", exemplaire=" + exemplaire +
                 '}';
     }
-    public double calculerAmende() {
-        // Calcul de l'amende en fonction de la durée de location et du type d'ouvrage
-        int dureeLocation = (int) ChronoUnit.DAYS.between(dateLocation, LocalDate.now());
-        int dureeMax = 0;
-        switch (exemplaire.getOuvrage().getTo()) {
-            case LIVRE:
-                dureeMax = 15;
-                break;
-            case DVD:
-                dureeMax = 3;
-                break;
-            case CD:
-                dureeMax = 7;
-                break;
-        }
-        int joursDeRetard = Math.max(0, dureeLocation - dureeMax);
-        double amende = joursDeRetard * 0.5; // Supposons une amende de 0.5€ par jour de retard
-        return amende;
+
+    public double calculerAmende(){
+         if(dateRestitution!=null){
+           LocalDate dateLim = dateLocation.plusDays(exemplaire.getOuvrage().njlocmax());
+           if(dateRestitution.isAfter(dateLim)){
+               int njretard = (int)ChronoUnit.DAYS.between(dateLim, dateRestitution);
+               return exemplaire.getOuvrage().amendeRetard(njretard);
+           }
+       }
+        return 0;
     }
 
-    public void enregistrerRetour() {
-        dateRestitution = LocalDate.now();
+    public void enregistrerRetour(){
+       if(dateRestitution==null) dateRestitution=LocalDate.now();//test sur nul pour éviter d'enregistrer retour 2 fois
     }
-
 }

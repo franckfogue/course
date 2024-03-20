@@ -99,6 +99,11 @@ public abstract class Ouvrage {
         this.lex = lex;
     }
 
+
+    public abstract double amendeRetard(int njours);
+
+    public abstract int njlocmax();
+
     @Override
     public String toString() {
         return "Ouvrage{" +
@@ -111,7 +116,6 @@ public abstract class Ouvrage {
                 ", genre='" + genre + '\'' +
                 '}';
     }
-    public abstract double amendeRetard(int njours);
     public void addAuteur(Auteur a ){
         lauteurs.add(a);
         a.getLouvrage().add(this);
@@ -130,22 +134,15 @@ public abstract class Ouvrage {
         lex.remove(e);
         e.setOuvrage(null);
     }
-    public List<Exemplaire> listerExemplaires() {
+    public List<Exemplaire>listerExemplaires(){
         return lex;
     }
 
-
-
-    public List<Exemplaire> listerExemplaires(boolean enLocation) {
-        List<Exemplaire> exemplairesFiltres = new ArrayList<>();
-        for (Exemplaire e : lex) {
-            if (enLocation && e.estEnLocation()) {
-                exemplairesFiltres.add(e);
-            } else if (!enLocation && !e.estEnLocation()) {
-                exemplairesFiltres.add(e);
-            }
+    public List<Exemplaire>listerExemplaires(boolean enLocation){
+        List<Exemplaire> lex2 = new ArrayList<>();
+        for(Exemplaire ex : lex){
+            if(ex.enLocation()==enLocation) lex2.add(ex);
         }
-        return exemplairesFiltres;
+        return lex2;
     }
-
 }
