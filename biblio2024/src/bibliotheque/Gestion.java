@@ -206,7 +206,7 @@ public class Gestion {
         System.out.println("Exemplaire créé : " + exemplaire);
     }
 
-
+//commentaire
     private void gestOuvrages() {
         sc.skip("\n");
         System.out.println("Titre de l'ouvrage : ");
