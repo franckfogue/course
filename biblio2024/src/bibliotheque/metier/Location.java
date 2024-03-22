@@ -94,4 +94,7 @@ public class Location {
     public void enregistrerRetour(){
        if(dateRestitution==null) dateRestitution=LocalDate.now();//test sur nul pour éviter d'enregistrer retour 2 fois
     }
+    public boolean estRendu() {
+        return dateRestitution != null && dateRestitution.isBefore(LocalDate.now());
+    }
 }

@@ -115,13 +115,27 @@ public class Lecteur {
         return Objects.hash(numlecteur);
     }
 
-    public List<Exemplaire> listerExemplairesEnLocation(){
-        //TODO lister exemplaires en location lecteur
-        return null;
+
+        public List<Exemplaire> listerExemplairesEnLocation() {
+            List<Exemplaire> exemplairesEnLocation = new ArrayList<>();
+            for (Location location : lloc) {
+                if (!location.estRendu()) {
+                    exemplairesEnLocation.add(location.getExemplaire());
+                }
+            }
+            return exemplairesEnLocation;
+        }
+
+
+
+        public List<Exemplaire> listerExemplairesEnLoues() {
+            List<Exemplaire> exemplairesEnLoues = new ArrayList<>();
+            for (Location location : lloc) {
+                if (location.estRendu()) {
+                    exemplairesEnLoues.add(location.getExemplaire());
+                }
+            }
+            return exemplairesEnLoues;
+        }
     }
 
-    public List<Exemplaire> listerExemplairesEnLoues(){
-        //TODO lister exemplaires loues lecteur
-        return null;
-    }
-}

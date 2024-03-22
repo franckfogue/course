@@ -93,4 +93,18 @@ public class DVD extends Ouvrage{
                 ", sousTitres=" + sousTitres +
                 "} " + super.toString();
     }
+
+    public void ajouterAutreLangue(String langue) {
+        if (!langue.equals(this.getlangue()) && !autresLangues.contains(langue)) {
+            autresLangues.add(langue);
+        } else {
+            System.out.println("Langue déjà présente ou identique à la langue d'origine.");
+        }
+    }
+
+    private String getlangue() {
+        return langue;
+    }
 }
+
+
