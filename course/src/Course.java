@@ -64,7 +64,7 @@ public class Course {
         this.dateFin=dateFin;
         this.kmTotal=kmTotal;
         this.etapes = new ArrayList<>();
-        this.inscrits = new ArrayList<>();
+
         this.classements = new ArrayList<>();
     }
 

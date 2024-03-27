@@ -115,27 +115,20 @@ public class Lecteur {
         return Objects.hash(numlecteur);
     }
 
-
-        public List<Exemplaire> listerExemplairesEnLocation() {
-            List<Exemplaire> exemplairesEnLocation = new ArrayList<>();
-            for (Location location : lloc) {
-                if (!location.estRendu()) {
-                    exemplairesEnLocation.add(location.getExemplaire());
-                }
-            }
-            return exemplairesEnLocation;
+    public List<Exemplaire> listerExemplairesEnLocation(){
+        List<Exemplaire> lex = new ArrayList<>();
+        for(Location loc : lloc){
+            if(loc.getDateRestitution()!=null)lex.add(loc.getExemplaire());
         }
-
-
-
-        public List<Exemplaire> listerExemplairesEnLoues() {
-            List<Exemplaire> exemplairesEnLoues = new ArrayList<>();
-            for (Location location : lloc) {
-                if (location.estRendu()) {
-                    exemplairesEnLoues.add(location.getExemplaire());
-                }
-            }
-            return exemplairesEnLoues;
-        }
+        return lex;
     }
 
+    public List<Exemplaire> listerExemplairesLoues(){
+        List<Exemplaire> lex = new ArrayList<>();
+        for(Location loc : lloc){
+            lex.add(loc.getExemplaire());
+            //TODO empêcher doublon si exemplaire loué plusieurs fois par même lecteur
+        }
+       return lex;
+    }
+}
