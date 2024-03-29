@@ -84,6 +84,7 @@ public class GestCourse {
         }
     }
 
+
     public void recherche() {
         try {
             System.out.print("Entrez l'ID de la course à rechercher : ");
