@@ -3,6 +3,7 @@ package bibliotheque.metier;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static bibliotheque.metier.TypeOuvrage.LIVRE;
 
@@ -12,11 +13,12 @@ public class Auteur {
     private String nationalite;
     private List<Ouvrage> louvrage = new ArrayList<>();
     //TODO remplacer par set
-
+    /*private Set<Ouvrage> louvrage;*/
     public Auteur(String nom, String prenom, String nationalite) {
         this.nom = nom;
         this.prenom = prenom;
         this.nationalite = nationalite;
+
 
     }
 
@@ -115,4 +117,9 @@ public class Auteur {
         }
         return lot;
     }
+    public List<Ouvrage> getOuvrages() {
+        return louvrage;
+    }
+
+
 }

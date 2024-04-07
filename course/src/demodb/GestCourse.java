@@ -62,7 +62,7 @@ public class GestCourse {
             System.out.print("Kilométrage total : ");
             int kmTotal = sc.nextInt();
 
-            // Requête d'insertion dans la base de donnéess
+            // Requête d'insertion dans la base de données
             String query = "INSERT INTO APICOURSE (nom, priceMoney, dateDebut, dateFin, kmTotal) VALUES (?, ?, ?, ?, ?)";
             try (PreparedStatement pstm = dbConnect.prepareStatement(query)) {
                 pstm.setString(1, nom);
