@@ -1,26 +1,16 @@
 package bibliotheque.metier;
-import bibliotheque.metier.Exemplaire;
 
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 
 public class Rayon {
     private String codeRayon;
     private String genre;
-    private String code;
-    private List<Exemplaire> lex = new ArrayList<>();
-    //TODO remplacer par set
-    /*private Set<Exemplaire> lex = new HashSet<>();
-    private Set<Exemplaire> exemplaires = new HashSet<>();*/
-    private Set<Exemplaire> exemplaires = new HashSet<>();
+    private Set<Exemplaire> lex = new HashSet<>();
+
+
     public Rayon(String codeRayon, String genre) {
         this.codeRayon = codeRayon;
         this.genre = genre;
-        this.exemplaires = exemplaires;
     }
 
     @Override
@@ -68,22 +58,17 @@ public class Rayon {
         this.genre = genre;
     }
 
-    public List<Exemplaire> getLex() {
+    public Set<Exemplaire> getLex() {
         return lex;
     }
 
-    public void setLex(List<Exemplaire> lex) {
+    public void setLex(Set<Exemplaire> lex) {
         this.lex = lex;
     }
 
-    public List<Exemplaire>listerExemplaires(){
+    public Set<Exemplaire>listerExemplaires(){
         return lex;
     }
 
-    public boolean contientExemplaire(Exemplaire exemplaire) {
-        return exemplaires.contains(exemplaire);
-    }
-    public String getCode() {
-        return code;
-    }
+
 }

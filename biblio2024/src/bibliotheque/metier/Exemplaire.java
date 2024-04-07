@@ -151,8 +151,6 @@ public class Exemplaire {
         return false;
     }
 
-    public void changerEtat(String nouvelEtat) {
-        this.etat = nouvelEtat;
-    }
+
 
 }

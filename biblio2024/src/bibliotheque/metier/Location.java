@@ -94,11 +94,4 @@ public class Location {
     public void enregistrerRetour(){
        if(dateRestitution==null) dateRestitution=LocalDate.now();//test sur nul pour éviter d'enregistrer retour 2 fois
     }
-    public void restituer() {
-        this.dateRestitution = LocalDate.now();
-        // Éventuellement changer l'état de l'exemplaire
-        if (exemplaire != null) {
-            exemplaire.changerEtat("disponible");
-        }
-    }
 }

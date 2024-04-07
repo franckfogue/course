@@ -4,8 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
-import java.util.HashSet;
+
 public class Lecteur {
     private int numlecteur;
     private  String nom,prenom;
@@ -124,19 +123,12 @@ public class Lecteur {
         return lex;
     }
 
-    public List<Exemplaire> listerExemplairesLoues() {
+    public List<Exemplaire> listerExemplairesLoues(){
         List<Exemplaire> lex = new ArrayList<>();
-        Set<Exemplaire> exemplairesAjoutes = new HashSet<>(); // Ensemble pour empêcher les doublons
-
-        for (Location loc : lloc) {
-            Exemplaire exemplaire = loc.getExemplaire();
-            // Vérifier si l'exemplaire a déjà été ajouté à la liste
-            if (!exemplairesAjoutes.contains(exemplaire)) {
-                lex.add(exemplaire);
-                exemplairesAjoutes.add(exemplaire); // Ajouter l'exemplaire à l'ensemble
-            }
+        for(Location loc : lloc){
+            lex.add(loc.getExemplaire());
+            //TODO empêcher doublon si exemplaire loué plusieurs fois par même lecteur
         }
-
-        return lex;
+       return lex;
     }
 }

@@ -2,8 +2,8 @@ package bibliotheque.metier;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public abstract class Ouvrage {
@@ -15,13 +15,11 @@ public abstract class Ouvrage {
     protected String langue;
     protected String genre;
 
-    protected List<Auteur> lauteurs=new ArrayList<>();
-    //TODO remplacer par set
-    protected List<Exemplaire> lex = new ArrayList<>();
-    //TODO remplacer par set
-    /*
-    protected Set<Auteur> lauteurs = new HashSet<>();
-    protected Set<Exemplaire> lex = new HashSet<>();*/
+    protected Set<Auteur> lauteurs=new HashSet<>();
+
+    protected Set<Exemplaire> lex = new HashSet<>();
+
+
     public Ouvrage(String titre, int ageMin, LocalDate dateParution, TypeOuvrage to, double prixLocation, String langue, String genre) {
         this.titre = titre;
         this.ageMin = ageMin;
@@ -88,19 +86,19 @@ public abstract class Ouvrage {
         this.genre = genre;
     }
 
-    public List<Auteur> getLauteurs() {
+    public Set<Auteur> getLauteurs() {
         return lauteurs;
     }
 
-    public void setLauteurs(List<Auteur> lauteurs) {
+    public void setLauteurs(Set<Auteur> lauteurs) {
         this.lauteurs = lauteurs;
     }
 
-    public List<Exemplaire> getLex() {
+    public Set<Exemplaire> getLex() {
         return lex;
     }
 
-    public void setLex(List<Exemplaire> lex) {
+    public void setLex(Set<Exemplaire> lex) {
         this.lex = lex;
     }
 
@@ -139,7 +137,7 @@ public abstract class Ouvrage {
         lex.remove(e);
         e.setOuvrage(null);
     }
-    public List<Exemplaire>listerExemplaires(){
+    public Set<Exemplaire>listerExemplaires(){
         return lex;
     }
 
@@ -150,9 +148,4 @@ public abstract class Ouvrage {
         }
         return lex2;
     }
-    public List<Auteur> getAuteurs() {
-        return lauteurs;
-    }
-
-
 }
