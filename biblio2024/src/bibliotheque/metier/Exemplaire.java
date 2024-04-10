@@ -99,9 +99,7 @@ public class Exemplaire {
        setDescriptionEtat(etat);
     }
 
-    public Lecteur lecteurActuel(){
-        if(enLocation()) return lloc.get(lloc.size()-1).getLoueur();
-        return null;
+
     }
     public List<Lecteur> lecteurs(){
         List<Lecteur> ll = new ArrayList<>();
@@ -112,10 +110,7 @@ public class Exemplaire {
         return null;
     }
 
-    public void envoiMailLecteurActuel(Mail mail){
-        if(lecteurActuel()!=null) System.out.println("envoi de "+mail+ " à "+lecteurActuel().getMail());
-        else System.out.println("aucune location en cours");
-    }
+
     public void envoiMailLecteurs(Mail mail){
         List<Lecteur>ll=lecteurs();
         if(ll.isEmpty()){
@@ -144,12 +139,21 @@ public class Exemplaire {
     }
 
 
-    public boolean enLocation(){
-        if(lloc.isEmpty()) return false;
-        Location l = lloc.get(lloc.size()-1);//la location en cours est la dernière de la liste
-        if(l.getDateRestitution()==null) return true;
-        return false;
+    public Lecteur lecteurActuel(){
+        if(enLocation()) return LOCATIONS.get(this);
+        return null;
     }
+
+    public void envoiMailLecteurActuel(Mail mail){
+        if(lecteurActuel()!=null) System.out.println("envoi de "+mail+ " à "+lecteurActuel().getMail());
+        else System.out.println("aucune location en cours");
+    }
+
+
+    public boolean enLocation(){
+        return LOCATIONS.get(this) !=null ;
+    }
+
 
 
 

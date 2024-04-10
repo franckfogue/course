@@ -13,17 +13,18 @@ import java.util.*;
 import static bibliotheque.utilitaires.Utilitaire.choixListe;
 
 public class Gestion {
+    // Déclaration de la HashMap pour stocker les locations (clé : exemplaire loué, valeur : lecteur-loueur)
+    public static final Map<Exemplaire, Lecteur> LOCATIONS = new HashMap<>();
+
     Scanner sc = new Scanner(System.in);
-//on a ôté static pour les listes qui n'est plus nécessaire
+
     private List<Auteur> laut = new ArrayList<>();
     private List<Lecteur> llect = new ArrayList<>();
-    private List<Ouvrage> louv= new ArrayList<>();
+    private List<Ouvrage> louv = new ArrayList<>();
     private List<Exemplaire> lex = new ArrayList<>();
-    private List<Rayon> lrayon= new ArrayList<>();
-    private List<Location> lloc = new ArrayList<>();
+    private List<Rayon> lrayon = new ArrayList<>();
 
-
-    public void populate(){
+    public void populate() {
         Auteur a = new Auteur("Verne","Jules","France");
         laut.add(a);
 
@@ -72,15 +73,11 @@ public class Gestion {
         Lecteur lec = new Lecteur(1,"Dupont","Jean",LocalDate.of(2000,1,4),"Mons","jean.dupont@mail.com","0458774411");
         llect.add(lec);
 
-        Location loc = new Location(LocalDate.of(2023,2,1),LocalDate.of(2023,3,1),lec,e);
-        lloc.add(loc);
-        loc.setDateRestitution(LocalDate.of(2023,2,4));
+
+        LOCATIONS.put(e,lec);
 
         lec = new Lecteur(1,"Durant","Aline",LocalDate.of(1980,10,10),"Binche","aline.durant@mail.com","045874444");
         llect.add(lec);
-
-        loc = new Location(LocalDate.of(2023,2,5),LocalDate.of(2023,3,5),lec,e);
-        lloc.add(loc);
     }
 
     private void menu() {
@@ -107,20 +104,42 @@ public class Gestion {
 
     private void gestLocations() {
         int choix;
-        List<Exemplaire> lex2 = new ArrayList<>(lex);
-        Iterator<Exemplaire> itlex2 = lex2.iterator();
-        while(itlex2.hasNext()){
-            if(itlex2.next().enLocation()) itlex2.remove();
+        List<Exemplaire> exemplairesNonLoues = new ArrayList<>();
+
+        // Filtre les exemplaires qui ne sont pas en location
+        for (Exemplaire exemplaire : lex) {
+            if (!LOCATIONS.containsKey(exemplaire)) {
+                exemplairesNonLoues.add(exemplaire);
+            }
         }
-        lex2.sort(new ExemplaireMatriculeComparator());
-        choix =choixListe(lex2);
-        if(choix==0)return;
-        Exemplaire ex = lex2.get(choix-1);
-        choix=choixListe(llect);
-        if(choix==0)return;
-        Lecteur lec = llect.get(choix-1);
-        lloc.add(new Location(lec,ex));
+
+        // Trie les exemplaires par matricule
+        exemplairesNonLoues.sort(new ExemplaireMatriculeComparator());
+
+        // Affiche les exemplaires disponibles à la location
+        for (int i = 0; i < exemplairesNonLoues.size(); i++) {
+            System.out.println((i + 1) + ". " + exemplairesNonLoues.get(i));
+        }
+
+        choix = choixListe(exemplairesNonLoues);
+        if (choix == 0) return;
+
+        Exemplaire exemplaireChoisi = exemplairesNonLoues.get(choix - 1);
+
+        // Affiche les lecteurs disponibles
+        for (int i = 0; i < llect.size(); i++) {
+            System.out.println((i + 1) + ". " + llect.get(i));
+        }
+
+        choix = choixListe(llect);
+        if (choix == 0) return;
+
+        Lecteur lecteurChoisi = llect.get(choix - 1);
+
+        // Ajoute la location à la HashMap
+        LOCATIONS.put(exemplaireChoisi, lecteurChoisi);
     }
+
 
     private void gestLecteurs() {
         System.out.println("numéro");
