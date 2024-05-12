@@ -334,5 +334,8 @@ public class Course {
         }
         return true;
     }
+    public List<Etape> listeEtape() {
+        return etapes;
+    }
 }
 

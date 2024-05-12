@@ -2,7 +2,7 @@ package bibliotheque.metier;
 
 import java.util.Objects;
 
-import static bibliotheque.gestion.GestionOld.LOCATIONS;
+import static bibliotheque.mvc.GestionMVC.LOCATIONS;
 
 public class Exemplaire {
 
@@ -19,8 +19,7 @@ public class Exemplaire {
         this.matricule = matricule;
         this.descriptionEtat=descriptionEtat;
         this.ouvrage = ouvrage;
-
-        this.ouvrage.getLex().add(this);
+        if(ouvrage!=null) this.ouvrage.getLex().add(this);
     }
 
     @Override
@@ -59,7 +58,7 @@ public class Exemplaire {
     public void setOuvrage(Ouvrage ouvrage) {
         if(this.ouvrage!=null) this.ouvrage.getLex().remove(this);
         this.ouvrage = ouvrage;
-        this.ouvrage.getLex().add(this);
+        if(this.ouvrage!=null) this.ouvrage.getLex().add(this);
     }
 
     public Rayon getRayon() {
@@ -92,7 +91,10 @@ public class Exemplaire {
     }
 
     public void envoiMailLecteurActuel(Mail mail){
-        if(lecteurActuel()!=null) System.out.println("envoi de "+mail+ " à "+lecteurActuel().getMail());
+        if(lecteurActuel()!=null) {
+            System.out.println("envoi de "+mail+ " à "+lecteurActuel().getMail());
+            mail.envoi(lecteurActuel());
+        }
         else System.out.println("aucune location en cours");
     }
 
